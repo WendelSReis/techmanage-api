@@ -8,16 +8,24 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Nome é obrigatório")
+    @Column(nullable = false)
     private String fullName;
 
-    @Email @NotBlank
+    @Email(message = "E-mail inválido")
+    @NotBlank(message = "E-mail é obrigatório")
+    @Column(nullable = false)
     private String email;
 
     @Pattern(regexp = "^\\+\\d{1,3}\\s\\d{2}\\s\\d{4,5}-\\d{4}$")
@@ -27,5 +35,6 @@ public class User {
     private LocalDate birthDate;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private UserType userType;
 }
