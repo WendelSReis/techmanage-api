@@ -7,8 +7,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    defer-datasource-initialization: true
     properties:
       hibernate:
         format_sql: true
   h2:
-    console.enabled: true
+    console:
+      enabled: true
+      path: /h2-console
